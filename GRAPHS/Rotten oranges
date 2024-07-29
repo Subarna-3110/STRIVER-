@@ -1,0 +1,56 @@
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+         int rot=0;int fresh=0;
+
+         Queue<int[]> q=new LinkedList<>();
+         //to find all rot and fresh
+         for(int i=0;i<n;i++)
+         {
+            for(int j=0;j<m;j++)
+            {
+                if(grid[i][j]==2)
+                {
+                    rot++;
+                    q.add(new int[]{i,j});
+                }
+                if(grid[i][j]==1)
+                {
+                    fresh++;
+                }
+            }
+         }
+
+         int tcnt=0,cnt=0;
+         if(fresh==0) return 0;
+         while(!q.isEmpty())
+         {
+            cnt++;
+            int[] dx={0,0,1,-1};
+            int[] dy={1,-1,0,0};
+            int size=q.size();
+            tcnt+=size;
+
+            for(int i=0;i<size;i++)
+            {
+                int[] pt=q.poll();
+                for(int j=0;j<4;j++)
+                {
+                    int row=pt[0]+dx[j];
+                    int col=pt[1]+dy[j];
+
+                    if(row>=0 &&row<n &&col>=0 && col<m && grid[row][col]==1)
+                    {
+                        grid[row][col]=2;
+                        q.offer(new int[]{row,col});
+                    }
+                }
+            }
+         }
+
+         int time=cnt-1;
+         if((tcnt-rot)==fresh)return time;
+         return -1;
+    }
+}
