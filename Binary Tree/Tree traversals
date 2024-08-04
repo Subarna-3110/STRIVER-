@@ -1,0 +1,76 @@
+
+
+ class TreeNode {
+     int data;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {
+         this.data = 0;
+         this.left = null;
+         this.right = null;
+     }
+     TreeNode(int data) {
+         this.data = data;
+         this.left = null;
+         this.right = null;
+     }
+     TreeNode(int data, TreeNode left, TreeNode right) {
+         this.data = data;
+         this.left = left;
+         this.right = right;
+     }
+ };
+
+
+import java.util.List;
+import java.util.ArrayList;
+public class Solution {
+    public static List<List<Integer>> getTreeTraversal(TreeNode root) {
+        // Write your code here.
+        List<Integer> arr1=new ArrayList<>();
+        List<Integer> arr2=new ArrayList<>();
+        List<Integer> arr3=new ArrayList<>();
+        preorder(root,arr1);
+        inorder(root,arr2);
+        postorder(root,arr3);
+
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(arr2);
+        result.add(arr1);
+        result.add(arr3);
+
+        return result;
+
+    }
+    static void preorder(TreeNode root,List<Integer> arr1)
+    {
+        if(root==null)
+        return;
+
+        arr1.add(root.data);
+        preorder(root.left,arr1);
+        preorder(root.right,arr1);
+
+    }
+
+    static void inorder(TreeNode root,List<Integer> arr2)
+     {
+        if(root==null)
+        return;
+
+   
+        inorder(root.left,arr2);
+        arr2.add(root.data);
+        inorder(root.right,arr2);
+
+    }
+    static void postorder(TreeNode root,List<Integer> arr3)
+    {
+        if(root==null)
+        return;
+
+        postorder(root.left,arr3);
+        postorder(root.right,arr3);
+        arr3.add(root.data);
+    }
+}
