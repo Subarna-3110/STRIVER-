@@ -1,0 +1,29 @@
+class Solution {
+    public String frequencySort(String s) {
+
+       Map<Character,Integer> map=new HashMap<>();
+
+       for(char c : s.toCharArray())
+       {
+        map.put(c,map.getOrDefault(c,0)+1);
+       }
+
+       PriorityQueue<Map.Entry<Character,Integer>> maxheap=new PriorityQueue<>((a,b)->b.getValue().compareTo(a.getValue()));
+       maxheap.addAll(map.entrySet());
+
+       StringBuilder ans=new StringBuilder();
+       while(!maxheap.isEmpty())
+       {
+        Map.Entry<Character,Integer> entry=maxheap.poll();
+        char character=entry.getKey();
+        int freq=entry.getValue();
+        for(int i=0;i<freq;i++)
+        {
+            ans.append(character);
+        }
+       }
+       return ans.toString();
+
+
+    }
+}
