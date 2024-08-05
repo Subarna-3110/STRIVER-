@@ -1,0 +1,18 @@
+class Solution {
+    public int rotateString(String s, String goal) {
+        // Check if lengths of the strings are different
+        if (s.length() != goal.length()) return -1;
+
+        // Concatenate the string with itself
+        String concatenated = s + s;
+
+        // Find the index of the goal in the concatenated string
+        int index = concatenated.indexOf(goal);
+
+        // If goal is not found, return -1 indicating it's not possible
+        if (index == -1) return -1;
+
+        // The number of rotations is the index found
+        return index;
+    }
+}
