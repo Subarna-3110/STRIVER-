@@ -18,10 +18,10 @@ class Solution {
         if(dp[i][j]!=-1) return dp[i][j];
 
         int down=0,diagnol=0;
-        down=lt.get(i).get(j)+solve(lt,i+1,j,dp);
-        diagnol=lt.get(i).get(j)+solve(lt,i+1,j+1,dp);
+        down=solve(lt,i+1,j,dp);
+        diagnol=solve(lt,i+1,j+1,dp);
 
-        return dp[i][j]=Math.min(down,diagnol);
+        return dp[i][j]=lt.get(i).get(j)+Math.min(down,diagnol);
 
 
     }
