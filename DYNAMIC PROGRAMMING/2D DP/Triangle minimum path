@@ -1,0 +1,29 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n=triangle.size();
+        
+        int dp[][]=new int[n][n]; 
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                dp[i][j] = -1;
+            }
+        }
+        return solve(triangle,0,0,dp);
+    }
+
+    static int solve(List<List<Integer>> lt,int i,int j,int dp[][])
+    {
+        if (i == lt.size() - 1) return lt.get(i).get(j);
+     
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        int down=0,diagnol=0;
+        down=lt.get(i).get(j)+solve(lt,i+1,j,dp);
+        diagnol=lt.get(i).get(j)+solve(lt,i+1,j+1,dp);
+
+        return dp[i][j]=Math.min(down,diagnol);
+
+
+    }
+
+}
