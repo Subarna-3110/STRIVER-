@@ -1,0 +1,34 @@
+class Solution{
+ static Boolean isSubsetSum(int N, int arr[], int sum) {
+        
+        Boolean dp[][] = new Boolean[N + 1][sum + 1];
+        
+        // Initialize the dp array for the base cases
+        for (int i = 0; i <= N; i++) {
+            dp[i][0] = true; // Sum of 0 is always achievable with an empty subset
+        }
+
+        // Fill the dp array with null for other cases
+        for (int i = 0; i <= N; i++) {
+            for (int j = 1; j <= sum; j++) {
+                dp[i][j] = null; // Initialize to null indicating not computed yet
+            }
+        }
+
+        return solve(N, arr, sum, dp);
+    }
+    
+    static boolean solve(int N, int arr[], int sum, Boolean dp[][]) {
+        if (sum == 0) return true;
+        if (N == 0) return false;
+        if (dp[N][sum] != null) return dp[N][sum];
+
+        if (arr[N - 1] > sum) {
+            dp[N][sum] = solve(N - 1, arr, sum, dp);
+        } else {
+            dp[N][sum] = solve(N - 1, arr, sum, dp) || solve(N - 1, arr, sum - arr[N - 1], dp);
+        }
+
+        return dp[N][sum];
+    }
+}
