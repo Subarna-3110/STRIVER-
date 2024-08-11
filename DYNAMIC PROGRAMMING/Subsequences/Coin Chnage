@@ -28,11 +28,7 @@ static int solve(int n,int sum,int dp[][],int coins[])
 
     if(dp[n][sum]!=-1)return dp[n][sum];
 
-    
-    
     dp[n][sum]=Math.min(solve(n-1,sum,dp,coins),solve(n,sum-coins[n-1],dp,coins)+1);
-    
-
     return dp[n][sum];
 }
 }
