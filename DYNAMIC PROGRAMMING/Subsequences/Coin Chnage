@@ -1,0 +1,38 @@
+class Solution
+{
+public int coinChange(int[] coins, int amount) {
+    int n = coins.length;
+    int[][] dp = new int[n + 1][amount + 1];
+    for(int[] row:dp)
+    {
+        Arrays.fill(row,-1);
+    }
+    if (n == 1)
+     {
+        if (amount % coins[0] == 0) {
+                return amount / coins[0]; // Return the exact number of coins needed
+            } else {
+                return -1; // Return -1 if it's impossible to make the amount
+            }
+     }
+     int result = solve(n, amount, dp, coins);
+     return result == Integer.MAX_VALUE - 1 ? -1 : result;
+
+}
+
+static int solve(int n,int sum,int dp[][],int coins[])
+{
+    if(sum==0) return dp[n][sum]=0;
+    if(sum<0) return Integer.MAX_VALUE - 1;
+    if(n==0) return Integer.MAX_VALUE - 1;
+
+    if(dp[n][sum]!=-1)return dp[n][sum];
+
+    
+    
+    dp[n][sum]=Math.min(solve(n-1,sum,dp,coins),solve(n,sum-coins[n-1],dp,coins)+1);
+    
+
+    return dp[n][sum];
+}
+}
