@@ -2,29 +2,27 @@ class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         char[] arr1=new char[text1.length()];
         char[] arr2=new char[text2.length()];
+        int[][] dp=new int[text1.length()+1][text2.length()+1];
 
-        for(int i=0;i< text1.length();i++)
+        for(int i=0;i<text1.length();i++)
         {
             arr1[i]=text1.charAt(i);
         }
+
         for(int i=0;i<text2.length();i++)
         {
-            arr2[i] = text2.charAt(i);
+            arr2[i]=text2.charAt(i);
         }
-        int common_countLCS = LCS(arr1, arr2, text1.length(), text2.length());
-        return common_countLCS;
+
+        return solve(arr1,arr2,text1.length(), text2.length(),dp);
 
     }
 
-    public static int[][] dp;
-
-    public static int LCS(char[] arr1,char[] arr2,int m,int n)
+    static int solve(char arr1[],char arr2[],int n,int m,int dp[][])
     {
-        dp=new int[m+1][n+1];
-
-        for(int i=0;i<=m;i++)
+        for(int i=0;i<=n;i++)
         {
-            for(int j=0;j<=n;j++)
+            for(int j=0;j<=m;j++)
             {
                 if(i==0||j==0)
                 {
@@ -32,14 +30,16 @@ class Solution {
                 }
                 else if(arr1[i-1]==arr2[j-1])
                 {
-                    dp[i][j]=1+dp[i-1][j-1];
+                    dp[i][j]=dp[i-1][j-1]+1;
                 }
                 else
                 {
                     dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
                 }
+
             }
         }
-        return dp[m][n];
+
+        return dp[n][m];
     }
 }
