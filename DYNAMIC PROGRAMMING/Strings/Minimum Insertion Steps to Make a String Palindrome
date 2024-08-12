@@ -1,0 +1,52 @@
+class Solution {
+    public int minInsertions(String s) {
+        
+        StringBuffer b=new StringBuffer(s);
+        String sb=b.reverse().toString();
+
+        int n=s.length();
+        int m=sb.length();
+
+        char[] arr1=new char[n];
+        char[] arr2=new char[m];
+
+        for(int i=0;i<n;i++)
+        {
+            arr1[i]=s.charAt(i);
+        }
+        for(int i=0;i<n;i++)
+        {
+            arr2[i]=sb.charAt(i);
+        }
+
+        int dp[][]=new int[n+1][m+1];
+
+        return s.length()-solve(arr1,arr2,n,m,dp);
+
+
+    }
+
+    static int solve(char arr1[],char arr2[],int n,int m,int dp[][])
+    {
+        for(int i=0;i<=n;i++)
+        {
+            for(int j=0;j<=m;j++)
+            {
+                if(i==0||j==0)
+                {
+                    dp[i][j]=0;
+                }
+                else if(arr1[i-1]==arr2[j-1])
+                {
+                    dp[i][j]=dp[i-1][j-1]+1;
+                }
+                else
+                {
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+
+        return dp[n][m];
+    }
+}
