@@ -1,0 +1,76 @@
+class Solution {
+    public String shortestCommonSupersequence(String str1, String str2) {
+         int n=str1.length();
+       int m=str2.length();
+       char[] arr1=new char[n];
+       char[] arr2=new char[m];
+        for(int i=0;i<n;i++)
+        {
+            arr1[i]=str1.charAt(i);
+        }
+
+        for(int i=0;i<m;i++)
+        {
+            arr2[i]=str2.charAt(i);
+        }
+
+       int[][] dp=new int[n+1][m+1];
+       int max=0;
+       for(int i=0;i<=n;i++)
+        {
+            for(int j=0;j<=m;j++)
+            {
+                if(i==0||j==0)
+                {
+                    dp[i][j]=0;
+                }
+                else if(arr1[i-1]==arr2[j-1])
+                {
+                    dp[i][j]=dp[i-1][j-1]+1;
+                    
+                }
+                else
+                {
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+                }
+
+            }
+        }
+        
+        int i=n,j=m;
+        StringBuilder s=new StringBuilder();
+        while(i>0 && j>0)
+        {
+            if(arr1[i-1]==arr2[j-1])
+            {
+                s.append(arr1[i-1]);
+                i--;
+                j--;
+            }
+            else if(dp[i][j-1]>dp[i-1][j])
+            {
+                s.append(arr2[j-1]);
+                j--;
+            }
+            else
+            {
+                s.append(arr1[i-1]);
+                i--;
+            }
+        }
+
+       while(i>0)
+       {
+        s.append(arr1[i-1]);
+        i--;
+       }
+       while(j>0)
+       {
+        s.append(arr2[j-1]);
+        j--;
+       }
+        return s.reverse().toString();
+    }
+    
+    
+}
