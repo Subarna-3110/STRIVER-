@@ -1,0 +1,18 @@
+
+    public static List<Integer> rotateLeft(int d, List<Integer> arr) {
+    // Write your code here
+        int n = arr.size();  // Use size() method to get the number of elements in the list
+        List<Integer> result = new ArrayList<>(n);  // Create a new list to store the rotated array
+
+        // Add elements from index 'd' to the end of the list
+        for (int i = d; i < n; i++) {
+            result.add(arr.get(i));
+        }
+
+        // Add elements from the start of the list to index 'd-1'
+        for (int i = 0; i < d; i++) {
+            result.add(arr.get(i));
+        }
+
+        return result; 
+    }
