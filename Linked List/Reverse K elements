@@ -1,0 +1,39 @@
+import java.util.*;
+class Main
+{
+  public static void main(String args[])
+  {
+    Scanner sc=new Scanner(System.in);
+    LinkedList<Integer> l1=new LinkedList<>();
+    LinkedList<Integer> l2=new LinkedList<>();
+    int val=sc.nextInt();
+    while(val!=-1)
+    {
+      l1.addLast(val);
+      val=sc.nextInt();
+    }
+    int k=sc.nextInt();
+    int m=l1.size()/k;
+
+    int n=0;
+for (int count=1;count<=m; count++)
+{  LinkedList<Integer> chunk = new LinkedList<>();
+     for(int i=0;i<k;i++)
+     { chunk.addFirst(l1.get(n)); 
+       n++;
+     }
+  l2.addAll(chunk);
+}
+
+  LinkedList<Integer> remaining = new LinkedList<>();
+        while (n < l1.size()) {
+            remaining.add(l1.get(n)); // Add remaining elements as they are
+            n++;
+        }
+        l2.addAll(remaining);
+    for(int a:l2)
+    {
+      System.out.println(a+" ");
+    }
+  }
+}
