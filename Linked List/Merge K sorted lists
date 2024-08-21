@@ -1,0 +1,24 @@
+import java.util.*;
+class Main
+{
+  public static void main(String args[])
+  {
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt();
+    LinkedList<Integer> l1=new LinkedList<>();
+    int count=0;
+    while(count<n)
+    {
+      int val=sc.nextInt();
+      if(val==-1)
+        count++;
+      else
+        l1.addLast(val);
+    }
+    Collections.sort(l1);
+    for(int k:l1)
+    { System.out.print(k+" ");
+    }
+      
+  }
+}
