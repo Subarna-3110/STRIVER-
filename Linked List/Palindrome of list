@@ -1,0 +1,37 @@
+import java.util.*;
+
+class Main
+{
+  public static void main(String args[])
+  {
+    Scanner sc=new Scanner(System.in);
+    LinkedList<Integer> l1=new LinkedList<>();
+   
+    int n=sc.nextInt();
+    
+    for(int i=0;i<n;i++)
+    { l1.addLast(sc.nextInt());
+    }
+    LinkedList<Integer> l2=new LinkedList<>();
+    for(int i:l1)
+    {  l2.addFirst(i);
+    }
+    boolean check= true;
+    
+    for(int i=0; i<l1.size(); i++)
+    {  
+      if(l1.get(i)!=l2.get(i))
+      { check=false;
+       break;
+      }
+    }
+    
+    if(check)
+    {
+      System.out.println("True");
+    }
+    else
+    { System.out.println("False");
+    }
+  }
+}
