@@ -1,0 +1,42 @@
+import java.util.*;
+class Main
+{
+  public static void main(String args[])
+  {
+    LinkedList<Integer> l1=new LinkedList<>();
+    LinkedList<Integer> l2=new LinkedList<>();
+    LinkedList<Integer> l3=new LinkedList<>();
+     Scanner sc=new Scanner(System.in);
+    int val=sc.nextInt();
+    while(val!=-1)
+    {l1.addLast(val);
+      val=sc.nextInt();
+    }
+    
+    System.out.print("Given linked list:");
+    System.out.print("\n");
+     for(int b:l1)
+    {
+      System.out.print(b+" ");
+    }
+    System.out.print("\n");
+    
+    int k=sc.nextInt();
+    
+    for(int i=0;i<k;i++)
+    { 
+      l2.addLast(l1.get(i));
+    }
+    for(int j=k;j<l1.size();j++)
+    {
+      l3.addLast(l1.get(j));
+    }
+    l3.addAll(l2);
+    System.out.println("Rotated Linked list:");
+    for(int a:l3)
+    {
+      System.out.print(a+" ");
+    }
+    
+  }
+}
