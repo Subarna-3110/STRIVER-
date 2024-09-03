@@ -1,0 +1,22 @@
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n=nums.length;
+        int[] temp=new int[nums.length];int m=0;k=k%n;
+        for(int i=n-k;i<nums.length;i++)
+        {
+            temp[m++]=nums[i];
+        }
+        for(int i=0;i<n-k;i++)
+        {
+            temp[m++]=nums[i];
+        }
+         for (int i = 0; i < n; i++) {
+            nums[i] = temp[i];
+        }
+
+        // Print the rotated array (for debugging or output purposes)
+        for (int i = 0; i < n; i++) {
+            System.out.print(temp[i] + " ");  // Optional: Add a space for better readability
+        }
+    }
+}
