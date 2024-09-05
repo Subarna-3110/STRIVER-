@@ -1,0 +1,29 @@
+class Solution {
+
+        private int maxSum = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+       
+        getMaxSum(root);
+        return maxSum;
+    }
+
+    
+    private int getMaxSum(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        // Recursively calculate the maximum sum on the left and right subtrees
+        int leftMax = Math.max(getMaxSum(node.left), 0); // Ignore negative path sums
+        int rightMax = Math.max(getMaxSum(node.right), 0); // Ignore negative path sums
+
+        int currentPathSum = node.val + leftMax + rightMax;
+
+        maxSum = Math.max(maxSum, currentPathSum);
+
+        return node.val + Math.max(leftMax, rightMax);
+    }
+        
+    
+}
