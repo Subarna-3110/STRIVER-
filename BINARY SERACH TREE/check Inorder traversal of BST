@@ -1,0 +1,18 @@
+class Solution {
+    static boolean isBSTTraversal(int arr[]) {
+
+        // Make a copy of the original array
+        int[] sortedArr = Arrays.copyOf(arr, arr.length);
+        
+        // Sort the copy of the array
+        Arrays.sort(sortedArr);
+        for (int i = 1; i < sortedArr.length; i++) {
+            if (sortedArr[i] == sortedArr[i - 1]) {
+                return false; // Duplicates found
+            }
+        }
+        // Check if the original array is equal to the sorted array
+        return Arrays.equals(arr, sortedArr);
+
+    }
+}
