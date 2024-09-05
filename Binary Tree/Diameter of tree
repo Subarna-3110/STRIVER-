@@ -1,0 +1,25 @@
+class Solution {
+    private int dia= 0;
+    
+    public int diameterOfBinaryTree(TreeNode root) {
+
+        
+       getheight(root);
+       return dia;
+    }
+
+     int getheight(TreeNode root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        
+        int left=getheight(root.left);
+        int right=getheight(root.right);
+
+        // Update the diameter at each node
+        dia= Math.max(dia, left+ right);
+        return Math.max(left,right)+1;
+    }
+}
