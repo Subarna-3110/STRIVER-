@@ -1,0 +1,82 @@
+class Solution
+{
+	ArrayList <Integer> boundary(Node node)
+	{
+	    ArrayList<Integer> res=new ArrayList<>();
+	    
+	    if(node==null) return res;
+	    
+	    if(!isleaf(node))
+	    {
+	        res.add(node.data);
+	    }
+	    
+	    addleft(node,res);
+	    addleaves(node,res);
+	    addright(node,res);
+	    return res;
+	}
+	
+	boolean isleaf(Node root)
+	{
+	    return root.left==null && root.right==null;
+	}
+	
+	void addleft(Node root,ArrayList<Integer> res)
+	{
+	    Node curr=root.left;
+	    while(curr!=null)
+	    {
+	        if(!isleaf(curr))
+	        {
+	            res.add(curr.data);
+	        }
+	        
+	        if(curr.left!=null)
+	        {
+	            curr=curr.left;
+	        }
+	        else
+	        {
+	            curr=curr.right;
+	        }
+	    }
+	}
+	
+	void addleaves(Node root,ArrayList<Integer> res)
+	{
+	     if(root==null) return ;
+	     if (isleaf(root))
+	     {
+            res.add(root.data);
+         }
+        
+        addleaves(root.left, res);  // Traverse left subtree
+        addleaves(root.right, res);
+	}
+	
+	void addright(Node root,ArrayList<Integer> res)
+	{
+	    Node curr = root.right;
+        List<Integer> temp = new ArrayList<>();
+        while (curr != null) {
+            // If the current node is not a leaf,
+            // add its value to a temporary list
+            if (!isleaf(curr)) {
+                temp.add(curr.data);
+            }
+            // Move to the right child if it exists,
+            // otherwise move to the left child
+            if (curr.right != null) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        for(int i=temp.size()-1;i>=0;i--)
+        {
+            res.add(temp.get(i));
+        }
+        
+	}
+}
