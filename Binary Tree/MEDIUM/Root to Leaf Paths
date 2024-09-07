@@ -1,0 +1,31 @@
+class Solution {
+    public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+        // code here
+        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+         if (root == null) {
+            return ans;
+        }
+        
+        
+        findPaths (root,new ArrayList<>(),ans);
+        return ans;
+    }
+    
+    public static void findPaths(Node node,ArrayList<Integer> currentpath,ArrayList<ArrayList<Integer>> ans)
+    {
+        if(node==null) return ;
+        currentpath.add(node.data);
+        
+        if(node.left==null && node.right==null)//leaf node reached
+        {
+            ans.add(new ArrayList<>(currentpath));
+        }
+        else
+        {
+            findPaths(node.left,currentpath,ans);
+            findPaths(node.right,currentpath,ans);
+        }
+        
+        currentpath.remove(currentpath.size()-1);
+    }
+}
