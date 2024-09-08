@@ -1,0 +1,20 @@
+  public static int last_animal_name_length(String animal_sequence) {
+    // Write your code here
+        
+        char sep='-'; char s='|';
+        animal_sequence=animal_sequence.replace(Character.toString(sep)," ");
+        animal_sequence=animal_sequence.replace(Character.toString(s),"");
+        
+        String animals[]=animal_sequence.split("\\s+");
+        for(int i=animals.length-1;i>=0;i--)
+        {
+            String animal=animals[i].trim();
+            
+            if(!animal.isEmpty())
+            {
+                return animal.length();
+            }
+        }
+        return 0;
+        
+    }
