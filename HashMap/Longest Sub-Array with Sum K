@@ -19,3 +19,54 @@ class Solution {
         return max;
     }
 }
+
+
+import java.util.Scanner;
+
+class Solution {
+    // Function to find the starting and ending index of the subarray with sum S
+    public static void findSubarrayWithSum(int A[], int N, int S) {
+        // Traverse the array with brute force method
+        for (int i = 0; i < N; i++) {
+            int currentSum = 0;
+
+            // Check all subarrays starting from index i
+            for (int j = i; j < N; j++) {
+                currentSum += A[j];  // Add current element to currentSum
+
+                // If current sum matches S, print the starting and ending index
+                if (currentSum == S) {
+                    // Print the indices in 1-based indexing
+                    System.out.println((i + 1) + " " + (j + 1));
+                    return;  // Exit after finding the first such subarray
+                }
+            }
+        }
+
+        // If no subarray with sum S is found, print -1
+        System.out.println("-1");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input N (size of the array) and S (target sum)
+        System.out.print("Enter the size of the array (N): ");
+        int N = sc.nextInt();
+
+        System.out.print("Enter the target sum (S): ");
+        int S = sc.nextInt();
+
+        // Input the array elements
+        int[] A = new int[N];
+        System.out.print("Enter the elements of the array: ");
+        for (int i = 0; i < N; i++) {
+            A[i] = sc.nextInt();
+        }
+
+        // Find and print the subarray with sum S
+        findSubarrayWithSum(A, N, S);
+
+        sc.close();
+    }
+}
