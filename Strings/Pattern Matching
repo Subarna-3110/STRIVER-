@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class WildcardMatching {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input the string s and the pattern p
+        String s = sc.nextLine();
+        String p = sc.nextLine();
+
+        // Initialize variables
+        int i = 0, j = 0;
+        int a = 0; // Flag to indicate a match
+
+        // Iterate through the string and pattern
+        while (i < s.length() && j < p.length()) {
+            // If characters match or pattern has '?', continue
+            if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?') {
+                i++;
+                j++;
+            } 
+            // If we encounter '*', set a to 1 and break out of the loop
+            else if (p.charAt(j) == '*') {
+                a = 1; // Found a match with '*'
+                break; // Break out of the loop
+            } 
+            else {
+                a = 0; // No match
+                break;
+            }
+        }
+
+      if (i == s.length() && j == p.length()) {
+            a = 1; // Both matched completely
+
+
+
+        if (a == 1) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+
+    }
+}
