@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+class Solution {
+    public static void main(String[] args) {
+        // Creating a scanner object to take input from the user
+        Scanner sc = new Scanner(System.in);
+
+        // Prompt the user to enter the main string
+        System.out.println("Enter the main text string:");
+        String txt = sc.nextLine();
+
+        // Prompt the user to enter the pattern string
+        System.out.println("Enter the pattern to search:");
+        String pat = sc.nextLine();
+
+        // Variable to track the current index in the main string
+        int index = 0;
+        boolean found = false;
+
+        // Loop to find all occurrences of the pattern in the text
+        while ((index = txt.indexOf(pat, index)) != -1) {
+            System.out.println("Found pattern at index " + index);
+            index++; // Move to the next character for further search
+            found = true;
+        }
+
+        // If no occurrence is found
+        if (!found) {
+            System.out.println("Pattern not found");
+        }
+
+        // Close the scanner to avoid memory leaks
+        sc.close();
+    }
+}
