@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class RomanNumeral {
+
+    // Function to convert integer to Roman numeral
+    public static String intToRoman(int num) {
+        // Arrays for Roman numerals and their corresponding integer values
+        int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        StringBuilder roman = new StringBuilder();
+
+        // Convert the number to Roman numeral by subtracting largest possible values
+        for (int i = 0; i < values.length; i++) {
+            while (num >= values[i]) {
+                roman.append(symbols[i]);
+                num -= values[i];
+            }
+        }
+
+        return roman.toString();
+    }
+
+    public static void main(String[] args) {
+        // Taking input from the user
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+
+        // Convert the number to Roman numeral and print the result
+        System.out.println("Roman Numeral: " + intToRoman(number));
+
+        sc.close();
+    }
+}
