@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class StockProfit {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Input the number of days
+        int n = sc.nextInt();
+        
+        // Input the stock prices
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int i = 0;
+        int sum = 0;
+
+        // Iterate through the prices
+        while (i < n - 1) {
+            // Find the local minimum (buy point)
+            while (i < n - 1 && arr[i] >= arr[i + 1]) {
+                i++;
+            }
+            
+            // If we reach the end, break out
+            if (i == n - 1) break;
+
+            int start = arr[i]; // Buy at this price
+            i++;
+
+            // Find the local maximum (sell point)
+            while (i < n - 1 && arr[i] <= arr[i + 1]) {
+                i++;
+            }
+
+            // Now, i is at the local maximum (selling point)
+            int end = arr[i];  // Sell at this price
+            sum += end - start;  // Add the profit
+        }
+
+        // Output the total profit
+        System.out.println(sum);
+    }
+}
