@@ -1,0 +1,61 @@
+class Node {
+    int data;
+    Node left, right;
+
+    // Constructor to create a new node
+    public Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+
+class BinaryTree {
+    Node root;
+
+    // Insert a node into the binary search tree
+    public Node insert(Node node, int data) {
+        // If the tree is empty, return a new node
+        if (node == null) {
+            node = new Node(data);
+            return node;
+        }
+
+        // Otherwise, recur down the tree
+        if (data < node.data) {
+            node.left = insert(node.left, data);
+        } else if (data > node.data) {
+            node.right = insert(node.right, data);
+        }
+
+        // Return the (unchanged) node pointer
+        return node;
+    }
+
+    // In-order traversal of the binary tree
+    public void inorderTraversal(Node node) {
+        if (node != null) {
+            inorderTraversal(node.left); // Traverse the left subtree
+            System.out.print(node.data + " "); // Visit the node
+            inorderTraversal(node.right); // Traverse the right subtree
+        }
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] arr=new int[n]; 
+          for(int i=0;i<n;i++)
+        {arr[i]=sc.nextInt();
+        }
+         for (int data : arr) 
+          {
+            tree.root = tree.insert(tree.root, data);
+          }
+
+        // Print the in-order traversal of the binary tree
+        System.out.print("In-order traversal: ");
+        tree.inorderTraversal(tree.root);
+    }
+}
