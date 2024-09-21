@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class MinMergeOperationsPalindrome {
+    public static int minMergeOperations(int[] arr, int n) {
+        int left = 0;
+        int right = n - 1;
+        int merges = 0;
+
+        // Two-pointer approach
+        while (left < right) {
+            if (arr[left] == arr[right]) {
+                // If both ends are equal, no merge is needed
+                left++;
+                right--;
+            } else if (arr[left] < arr[right]) {
+                // Merge the left element with the next one
+                arr[left + 1] += arr[left];
+                left++;
+                merges++;
+            } else {
+                // Merge the right element with the previous one
+                arr[right - 1] += arr[right];
+                right--;
+                merges++;
+            }
+        }
+
+        return merges;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Input the size of the array
+        System.out.print("Enter the size of the array: ");
+        int n = sc.nextInt();
+        
+        // Input the array elements
+        int[] arr = new int[n];
+        System.out.println("Enter the array elements: ");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        
+        // Call the function and print the result
+        int result = minMergeOperations(arr, n);
+        System.out.println("Minimum number of merge operations: " + result);
+        
+        sc.close();
+    }
+}
