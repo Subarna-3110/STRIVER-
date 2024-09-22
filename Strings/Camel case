@@ -1,0 +1,18 @@
+import java.util.*;
+
+class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+
+        String a = sc.nextLine();
+        String[] words = a.split(" ");
+        StringBuilder res = new StringBuilder();
+        
+        for (String word : words) {
+
+          res.append(word.substring(0, 1).toUpperCase()).append(word.substring(1).toLowerCase());
+            }
+
+        System.out.println(res.toString());
+    }
+}
