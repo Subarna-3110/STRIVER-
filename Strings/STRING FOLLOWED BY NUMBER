@@ -1,0 +1,44 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next(); // Read input string
+        
+        StringBuilder letters = new StringBuilder(); // To store letters
+        StringBuilder digits = new StringBuilder();  // To store digits
+
+        // Iterate through each character in the input string
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isDigit(ch)) {
+                digits.append(ch); // Append to digits
+            } else {
+                letters.append(ch); // Append to letters
+            }
+        }
+
+        // Convert StringBuilder to char array and sort
+        char[] larr = letters.toString().toCharArray();
+        char[] darr = digits.toString().toCharArray();
+
+        // Sum the digits
+        int sum = 0;
+        for (int i = 0; i < darr.length; i++) {
+            sum += darr[i] - '0'; // Convert char to int
+        }
+
+        // Sort the letters array
+        Arrays.sort(larr);
+        
+        // Convert sorted letters back to a String
+        String sortedLetters = new String(larr);
+
+        // Print the result
+        System.out.print(sortedLetters + sum);
+
+        // Close the scanner
+        sc.close();
+    }
+}
