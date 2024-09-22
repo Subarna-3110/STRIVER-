@@ -1,6 +1,6 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        
+         
         char[] a=s.toCharArray();
         char[] b=t.toCharArray();
 
@@ -25,7 +25,8 @@ for(int i=0;i<n;i++)
     }
 } 
 
-List<List<String>> result = new ArrayList<>(map.values()); 
+List<List<String>> result = new ArrayList<>(map.values());
+result.sort(Comparator.comparingInt(List::size));
 
 for(List<String> group: result)
 { for(String word:group)
