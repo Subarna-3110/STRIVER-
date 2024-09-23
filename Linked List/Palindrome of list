@@ -35,3 +35,47 @@ class Main
     }
   }
 }
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+        LinkedList<Integer> l1 = new LinkedList<>();
+        if(head==null||head.next==null)
+        {
+            return true;
+        }
+
+        ListNode slow = head, fast = head;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+
+        ListNode b=reverse(slow);
+        ListNode a=head;
+
+        while(b!=null)
+        {
+            if(a.val!=b.val)
+            {
+                return false;
+            }
+            a=a.next;
+            b=b.next;
+        }
+        return true;
+   }
+   ListNode reverse(ListNode head)
+   {
+    ListNode prev=null;
+    while(head!=null)
+    {
+        ListNode nextnode=head.next;
+        head.next=prev;//breaking link
+        prev=head;
+        head=nextnode;
+    }
+    return prev;
+   }
+}
