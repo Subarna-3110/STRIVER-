@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class PalindromicNumbers {
+
+    // Function to check if a number is a palindrome
+    public static boolean isPalindrome(int num) {
+        String str = Integer.toString(num);
+        String reversedStr = new StringBuilder(str).reverse().toString();
+        return str.equals(reversedStr);
+    }
+
+    // Function to find palindromic numbers between n and m
+    public static ArrayList<Integer> palindromicNumbers(int n, int m) {
+        ArrayList<Integer> palindromes = new ArrayList<>();
+        for (int i = n; i <= m; i++) {
+            if (isPalindrome(i)) {
+                palindromes.add(i);
+            }
+        }
+        return palindromes;
+    }
+
+    // Main function
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the start number (n): ");
+        int n = scanner.nextInt();
+
+        System.out.print("Enter the end number (m): ");
+        int m = scanner.nextInt();
+
+        ArrayList<Integer> palindromes = palindromicNumbers(n, m);
+        System.out.println("Palindromic numbers between " + n + " and " + m + ": " + palindromes);
+    }
+}
