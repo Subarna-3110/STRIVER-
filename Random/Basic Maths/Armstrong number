@@ -1,0 +1,15 @@
+class Solution {
+    static boolean armstrongNumber(int n) {
+     
+    int a=n;int no=0;int cube=1;int sum=0;
+     while(a>0)
+     {
+        no=a%10;
+        cube=no*no*no;
+        sum+=cube;
+        a=a/10;
+     }
+
+     return(sum==n);
+    }
+}
