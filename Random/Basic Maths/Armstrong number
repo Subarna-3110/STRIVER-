@@ -13,3 +13,26 @@ class Solution {
      return(sum==n);
     }
 }
+
+
+class Solution {
+    static boolean armstrongNumber(int n) {
+     
+     int k = String.valueOf(n).length();
+
+        int sum = 0;
+       
+        int a = n;
+       
+        while(a > 0){
+          
+            int ld = a % 10;
+          
+            sum += Math.pow(ld, k); 
+           
+            a=a / 10;
+        }
+        
+        return (sum==n);
+}
+}
