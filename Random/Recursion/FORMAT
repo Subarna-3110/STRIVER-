@@ -1,0 +1,15 @@
+void func(parameters) {
+    // 1️⃣ Base Case: Stop condition
+    if (some_condition)
+        return;
+
+    // 2️⃣ Do Something (usually before recursion — "pre-order")
+    // Example: print, update, process data
+    ...
+
+    // 3️⃣ Recursive Call (smaller version of problem)
+    func(smaller_problem);
+    
+    // 4️⃣ (Optional) Do Something After Recursion — "post-order"
+    ...
+}
