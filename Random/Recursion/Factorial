@@ -1,0 +1,37 @@
+1st type:
+int factorial(n)
+{
+   if(n == 0)
+   {
+     return 1;
+   }
+
+return n * factorial(n-1);
+
+}
+
+main()
+{
+   input(n);
+   factorial(n);
+
+}
+
+2nd type:
+class Main {
+    
+    static void func(int i, int sum)
+     {
+              if(i<1){
+                System.out.println(sum);
+                return;
+                }  
+           
+              func(i-1,sum*i);
+            
+    }
+    public static void main(String[] args) {
+       int n = 5;
+       func(n,1);
+    }
+}
