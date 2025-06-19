@@ -1,1 +1,61 @@
-..
+class Queue {
+    int front, rear, size;
+    int capacity;
+    int[] array;
+
+    // Constructor
+    public Queue(int capacity) {
+        this.capacity = capacity;
+        front = 0;
+        size = 0;
+        rear = capacity - 1;
+        array = new int[this.capacity];
+    }
+
+    // Check if queue is full
+    boolean isFull() {
+        return (size == capacity);
+    }
+
+    // Check if queue is empty
+    boolean isEmpty() {
+        return (size == 0);
+    }
+
+    // Add item to the queue
+    void enqueue(int item) {
+        if (isFull()) {
+            System.out.println("Queue is full");
+            return;
+        }
+        rear = (rear + 1) % capacity;
+        array[rear] = item;
+        size++;
+        System.out.println(item + " enqueued");
+    }
+
+    // Remove item from queue
+    int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+            return Integer.MIN_VALUE;
+        }
+        int item = array[front];
+        front = (front + 1) % capacity;
+        size--;
+        return item;
+    }
+
+    // Get front of the queue
+    int front() {
+        if (isEmpty()) return Integer.MIN_VALUE;
+        return array[front];
+    }
+
+    // Get rear of the queue
+    int rear() {
+        if (isEmpty()) return Integer.MIN_VALUE;
+        return array[rear];
+    }
+}
+
