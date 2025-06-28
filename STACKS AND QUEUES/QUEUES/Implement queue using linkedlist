@@ -1,0 +1,134 @@
+import java.util.*;
+class QueueNode
+{
+    int val;
+    QueueNode next;
+    QueueNode(int data)
+    {
+       val = data;
+       next = null;
+    }
+}  
+
+class Queue
+{
+    QueueNode Front = null, Rear = null;
+    int size = 0;
+
+boolean Empty()
+{
+    return Front == null;
+}  
+int Peek()
+{
+    if(Empty())  
+     {  System.out.println("Queue is Empty");
+        return -1;
+     } 
+    else 
+      return Front.val;
+}   
+void Enqueue(int value)
+{
+    QueueNode Temp;
+    Temp = new QueueNode(value); 
+    if (Temp == null)  //When heap exhausted 
+        System.out.println("Queue is Full");
+    else
+    {
+        if (Front == null)
+        {
+            Front = Temp;
+            Rear = Temp;
+        } 
+        else
+        {
+            Rear.next = Temp;
+            Rear = Temp;
+        }
+        System.out.println(value+" Inserted into Queue ");
+        size++;
+    } 
+}      
+void Dequeue() 
+{
+    if (Front == null) 
+        System.out.println("Queue is Empty");
+    else
+    { 
+        System.out.println(Front.val+" Removed From Queue");
+        QueueNode Temp = Front;
+        Front = Front.next;
+        size--;
+    }  
+}  
+public static void main(String args[])
+
+{
+    Queue Q=new Queue();
+    Q.Enqueue(10);
+    Q.Enqueue(20);
+    Q.Enqueue(30);
+    Q.Enqueue(40);
+    Q.Enqueue(50);
+    Q.Dequeue();
+    System.out.println("The size of the Queue is "+Q.size);
+    System.out.println("The Peek element of the Queue is "+Q.Peek());
+}
+} 
+
+
+
+
+import java.util.*;
+
+class QueueDemo {
+    Queue<Integer> queue;
+    
+    QueueDemo() {
+        queue = new LinkedList<>(); // LinkedList supports Queue methods
+    }
+    
+    boolean isEmpty() {
+        return queue.isEmpty();
+    }
+    
+    int peek() {
+        if (queue.isEmpty()) {
+            System.out.println("Queue is Empty");
+            return -1;
+        }
+        return queue.peek();
+    }
+    
+    void enqueue(int value) {
+        queue.add(value);  // or queue.offer(value);
+        System.out.println(value + " Inserted into Queue");
+    }
+    
+    void dequeue() {
+        if (queue.isEmpty()) {
+            System.out.println("Queue is Empty");
+        } else {
+            System.out.println(queue.poll() + " Removed From Queue");
+        }
+    }
+    
+    int size() {
+        return queue.size();
+    }
+
+    public static void main(String[] args) {
+        QueueDemo q = new QueueDemo();
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+        q.enqueue(40);
+        q.enqueue(50);
+        q.dequeue();
+        System.out.println("The size of the Queue is " + q.size());
+        System.out.println("The Peek element of the Queue is " + q.peek());
+    }
+}
+
+
