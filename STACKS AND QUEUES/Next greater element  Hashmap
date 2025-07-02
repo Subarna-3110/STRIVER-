@@ -1,0 +1,59 @@
+✅ Example Dry Run:
+For nums2 = [1, 3, 4, 2]:
+We build map:
+2 → -1
+4 → -1
+3 → 4
+1 → 3
+So map = {1:3, 3:4, 4:-1, 2:-1}
+Now look up:
+nums1 = [4, 1, 2]
+→ map[4] = -1
+→ map[1] = 3
+→ map[2] = -1
+✅ Final output: [-1, 3, -1]
+
+
+import java.util.*;
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        // Map to store next greater element for nums2[i]
+        Map<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+
+        // Step 1: Traverse nums2 to build map
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            int curr = nums2[i];
+
+            // Pop elements smaller than or equal to curr
+            while (!stack.isEmpty() && stack.peek() <= curr) {
+                stack.pop();
+            }
+
+            // If stack is empty, no greater element
+            map.put(curr, stack.isEmpty() ? -1 : stack.peek());   
+
+            // Push current element to stack
+            stack.push(curr);
+        }
+
+        // Step 2: Build result for nums1
+        int[] result = new int[nums1.length];
+        for (int i = 0; i < nums1.length; i++) {
+            result[i] = map.get(nums1[i]);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        int[] nums1 = {4, 1, 2};
+        int[] nums2 = {1, 3, 4, 2};
+
+        System.out.println(Arrays.toString(sol.nextGreaterElement(nums1, nums2)));
+        // Output: [-1, 3, -1]
+    }
+}
