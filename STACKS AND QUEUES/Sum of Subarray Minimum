@@ -1,0 +1,52 @@
+import java.util.Stack;
+
+public class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int n = arr.length;
+        int[] left = new int[n];   // number of elements to the left including arr[i] where arr[i] is min
+        int[] right = new int[n];  // number of elements to the right including arr[i] where arr[i] is min
+
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+
+        // Find left[i]
+        for (int i = 0; i < n; i++) {
+            while (!s1.isEmpty() && arr[s1.peek()] > arr[i]) {
+                s1.pop();
+            }
+            if (s1.isEmpty()) {
+                left[i] = i + 1;
+            } else {
+                left[i] = i - s1.peek();
+            }
+            s1.push(i);
+        }
+
+        // Find right[i]
+        for (int i = n - 1; i >= 0; i--) {
+            while (!s2.isEmpty() && arr[s2.peek()] >= arr[i]) {
+                s2.pop();
+            }
+            if (s2.isEmpty()) {
+                right[i] = n - i;
+            } else {
+                right[i] = s2.peek() - i;
+            }
+            s2.push(i);
+        }
+
+        // Now calculate result
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            res += arr[i] * left[i] * right[i];
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] arr = {3, 1, 2, 4};
+        System.out.println("Sum of subarray minimums = " + sol.sumSubarrayMins(arr));  // Output: 17
+    }
+}
