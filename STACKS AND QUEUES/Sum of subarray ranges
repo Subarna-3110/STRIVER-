@@ -1,0 +1,58 @@
+class Solution {
+    public long subArrayRanges(int[] nums) {
+        int n = nums.length;
+        int[] left = new int[n];  // min left
+        int[] right = new int[n]; // min right
+        int[] l = new int[n];     // max left
+        int[] r = new int[n];     // max right
+
+        Stack<Integer> s1 = new Stack<>(); // for min left
+        Stack<Integer> s2 = new Stack<>(); // for min right
+        Stack<Integer> s3 = new Stack<>(); // for max left
+        Stack<Integer> s4 = new Stack<>(); // for max right
+
+        // Minimum - Left (strict >)
+        for (int i = 0; i < n; i++) {
+            while (!s1.isEmpty() && nums[s1.peek()] > nums[i]) {
+                s1.pop();
+            }
+            left[i] = s1.isEmpty() ? i + 1 : i - s1.peek();
+            s1.push(i);
+        }
+
+        // Minimum - Right (non-strict >=)
+        for (int i = n - 1; i >= 0; i--) {
+            while (!s2.isEmpty() && nums[s2.peek()] >= nums[i]) {
+                s2.pop();
+            }
+            right[i] = s2.isEmpty() ? n - i : s2.peek() - i;
+            s2.push(i);
+        }
+
+        // Maximum - Left (strict <)
+        for (int i = 0; i < n; i++) {
+            while (!s3.isEmpty() && nums[s3.peek()] < nums[i]) {
+                s3.pop();
+            }
+            l[i] = s3.isEmpty() ? i + 1 : i - s3.peek();
+            s3.push(i);
+        }
+
+        // Maximum - Right (non-strict <=)
+        for (int i = n - 1; i >= 0; i--) {
+            while (!s4.isEmpty() && nums[s4.peek()] <= nums[i]) {
+                s4.pop();
+            }
+            r[i] = s4.isEmpty() ? n - i : s4.peek() - i;
+            s4.push(i);
+        }
+
+        long minSum = 0, maxSum = 0;
+        for (int i = 0; i < n; i++) {
+            minSum += 1L * nums[i] * left[i] * right[i];
+            maxSum += 1L * nums[i] * l[i] * r[i];
+        }
+
+        return maxSum - minSum;
+    }
+}
