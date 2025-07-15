@@ -1,0 +1,52 @@
+public class Main {
+
+    public static int lengthOfLoop(Node head) {
+
+        Map<Node, Integer> visitedNodes = new HashMap<>();
+        Node temp = head;
+        int timer = 0;
+
+        while (temp != null) {
+
+            if (visitedNodes.containsKey(temp)) {
+                int loopLength = timer - visitedNodes.get(temp);
+                return loopLength;
+            }
+   
+            visitedNodes.put(temp, timer);
+            temp = temp.next;
+            timer++;
+        }
+}
+
+
+public class LinkedListLoopLength 
+{
+    static int findLength(Node slow, Node fast)
+    {
+        int cnt = 1;
+        fast = fast.next;
+        
+        while(slow!=fast){
+            cnt++;
+            fast = fast.next;
+        }
+        
+          return cnt;
+    }
+
+    static int lengthOfLoop(Node head) 
+   {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;  
+            fast = fast.next.next; 
+            if (slow == fast) {
+                return findLength(slow, fast);
+            }
+    }
+
+        return 0; 
+}
