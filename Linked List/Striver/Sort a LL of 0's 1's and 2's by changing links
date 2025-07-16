@@ -1,0 +1,76 @@
+public class Sort012LinkedList {
+    public static ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode zeroHead = new ListNode(-1);
+        ListNode oneHead = new ListNode(-1);
+        ListNode twoHead = new ListNode(-1);
+
+        // Create tails (temp pointers) to build each list
+        ListNode zeroTemp = zeroHead;
+        ListNode oneTemp = oneHead;
+        ListNode twoTemp = twoHead;
+
+        ListNode curr = head;
+
+        while (curr != null) {
+            if (curr.data == 0) {
+                zeroTemp.next = curr;
+                zeroTemp = zeroTemp.next;
+            } else if (curr.data == 1) {
+                oneTemp.next = curr;
+                oneTemp = oneTemp.next;
+            } else {
+                twoTemp.next = curr;
+                twoTemp = twoTemp.next;
+            }
+            curr = curr.next;
+        }
+
+        // Combine the three lists: 0s -> 1s -> 2s
+        zeroTemp.next = (oneHead.next != null) ? oneHead.next : twoHead.next;
+        oneTemp.next = twoHead.next;
+        twoTemp.next = null;
+
+        return zeroHead.next;
+    }
+
+
+
+
+
+COUNT WAY :
+
+public class SortByCounting {
+    public static ListNode sortList(ListNode head) {
+        int cnt0 = 0, cnt1 = 0, cnt2 = 0;
+
+        ListNode curr = head;
+
+        // First pass: Count 0s, 1s, and 2s
+        while (curr != null) {
+            if (curr.data == 0) cnt0++;
+            else if (curr.data == 1) cnt1++;
+            else cnt2++;
+            curr = curr.next;
+        }
+
+        curr = head;
+
+        // Second pass: Overwrite node data with counted values
+        while (curr != null) {
+            if (cnt0 > 0) {
+                curr.data = 0;
+                cnt0--;
+            } else if (cnt1 > 0) {
+                curr.data = 1;
+                cnt1--;
+            } else {
+                curr.data = 2;
+                cnt2--;
+            }
+            curr = curr.next;
+        }
+
+        return head;
+    }
